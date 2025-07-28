@@ -1,15 +1,37 @@
+<?php
+session_start();
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+    header('Location: signin.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ImageFlash</title>
-    <link rel="stylesheet" href="fete.css"> <!-- Lien vers le fichier CSS -->
+    <title>Ajouter un produit</title>
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-    <div class="container">
-        <img id="image" src="c:\Users\Mr KOFFI\Desktop\demo.html\on s'amuse un peu\WhatsApp Image 2024-12-29 à 23.24.59_8494a95e.jpg" alt="Cliquez pour une image" />
-        <button onclick="genererImage()">Nouvelle image</button>
-    </div>
-    <script src="fete.js"></script> <!-- Lien vers le fichier JavaScript -->
+<header>
+    <h1>Ajouter un nouveau produit</h1>
+</header>
+<main class="main-content">
+    <form action="process_add_product.php" method="post" enctype="multipart/form-data">
+        <label>Nom du produit :</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Description :</label><br>
+        <textarea name="description" required></textarea><br><br>
+
+        <label>Prix (€) :</label><br>
+        <input type="number" step="0.01" name="price" required><br><br>
+
+        <label>Image :</label><br>
+        <input type="file" name="image" accept="image/*" required><br><br>
+
+        <button type="submit">Ajouter le produit</button>
+    </form>
+</main>
 </body>
 </html>
