@@ -1,23 +1,42 @@
-/**const blagues = [
-    "Pourquoi les canards sont-ils toujours à l'heure ? Parce qu'ils sont dans l'étang !",
-    "Que dit une imprimante dans une dispute ? Tu vas en baver !",
-    "Pourquoi les plongeurs plongent-ils toujours en arrière ? Parce que sinon ils tombent dans le bateau !"
-];
+<?php
+session_start();
 
-function genererBlague() {
-    const randomIndex = Math.floor(Math.random() * blagues.length);
-    document.getElementById('blague').textContent = blagues[randomIndex];
-}**/
-const images = [
-    "image/guy-1.jpg", // Remplacez par vos noms de fichiers locaux
-    "guy-1.png",
-    "image3.jpg",
-    "https://via.placeholder.com/600", // Exemple d'image externe
-    "https://picsum.photos/600" // Exemple d'image générée aléatoirement
-];
-
-function genererImage() {
-    const randomIndex = Math.floor(Math.random() * images.length);
-    const imageElement = document.getElementById('image');
-    imageElement.src = images[randomIndex];
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+    header('Location: signin.php');
+    exit();
 }
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - my_shop</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<header>
+    <h1>my_shop - Administration</h1>
+    <a href="logout.php" class="logout">Déconnexion</a>
+</header>
+
+<div class="container">
+    <nav class="sidebar">
+        <ul>
+            <li><a href="admin_users.php">📋 Afficher les utilisateurs</a></li>
+            <li><a href="admin_edit_user.php">📝 Modifier un utilisateur</a></li>
+            <li><a href="admin_delete_user.php">🗑️ Supprimer un utilisateur</a></li>
+            <hr>
+            <li><a href="admin_add_product.php">➕ Ajouter un produit</a></li>
+            <li><a href="admin_products.php">📦 Voir tous les produits</a></li>
+            <li><a href="admin_edit_product.php">✏️ Modifier un produit</a></li>
+            <li><a href="admin_delete_product.php">🗑️ Supprimer un produit</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h2>Bienvenue, administrateur 👋</h2>
+        <p>Utilisez le menu à gauche pour gérer les utilisateurs et les produits.</p>
+    </main>
+</div>
+</body>
+</html>
